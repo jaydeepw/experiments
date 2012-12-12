@@ -1,0 +1,29 @@
+# Object files
+*.o
+*.slo
+*.lo
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Compiled Static libraries
+*.lai
+*.la
+
+# Added by JW
+.directory
+*.bar
+arm/*
+x86/*
