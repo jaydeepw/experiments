@@ -3,11 +3,13 @@ package com.github.jaydeep.cardlist;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
@@ -36,13 +38,13 @@ public class ScannedCardsListActivity extends AppCompatActivity {
         }
 
         mFabButton = (FloatingActionButton) findViewById(R.id.fab);
-        /*mFabButton.setOnClickListener(new View.OnClickListener() {
+        mFabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });*/
+        });
 
         SuperRecyclerView superRecyclerView = (SuperRecyclerView) findViewById(R.id.scanned_cards_list);
         superRecyclerView.getRecyclerView().setOnScrollListener(new HidingScrollListener() {

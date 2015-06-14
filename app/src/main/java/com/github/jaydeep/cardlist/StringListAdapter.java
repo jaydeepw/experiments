@@ -1,10 +1,13 @@
 package com.github.jaydeep.cardlist;
 
 
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,10 +15,15 @@ import java.util.Arrays;
 
 public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.ViewHolder> {
 
+    private final View.OnClickListener mConvertCardListener;
+    private final View.OnClickListener mDeletedCardListener;
     public ArrayList<String> data;
 
-    public StringListAdapter(ArrayList<String> data) {
+    public StringListAdapter(ArrayList<String> data, View.OnClickListener convertCardListener,
+                             View.OnClickListener deleteCardListener) {
         this.data = data;
+        mConvertCardListener = convertCardListener;
+        mDeletedCardListener = deleteCardListener;
     }
 
     @Override
@@ -26,7 +34,9 @@ public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.Vi
 
     @Override
     public void onBindViewHolder(StringListAdapter.ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position));
+        holder.cardNote.setText(data.get(position));
+        holder.convertCard.setOnClickListener(mConvertCardListener);
+        holder.deleteCard.setOnClickListener(mDeletedCardListener);
     }
 
     @Override
@@ -66,11 +76,17 @@ public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        public TextView cardNote;
+        public ImageView cardImage;
+        public Button convertCard;
+        public Button deleteCard;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.profile_name);
+            cardNote = (TextView) itemView.findViewById(R.id.textview_card_note);
+            cardImage = (ImageView) itemView.findViewById(R.id.card_image);
+            convertCard = (Button) itemView.findViewById(R.id.btn_convert_to_contact);
+            deleteCard = (Button) itemView.findViewById(R.id.btn_delete);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.github.jaydeep.cardlist;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -38,13 +39,31 @@ public class ScannedCardsListFragment extends Fragment {
         list.add("F");
         list.add("G");
         list.add("H");
-        mAdapter = new StringListAdapter(list);
+        mAdapter = new StringListAdapter(list, mConvertCardListener, mDeleteCardListener);
 
         if (true) {
             // TODO: is internet
             // getPendingRequests();
         }
     }
+
+    private View.OnClickListener mConvertCardListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO: make an API call here.
+            Snackbar.make(v, "Card will be converted", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+    };
+
+    private View.OnClickListener mDeleteCardListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO: make an API call here.
+            Snackbar.make(v, "Card will be DELETED", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
