@@ -1,5 +1,6 @@
 package com.github.jaydeep.cardlist;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,12 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.intouchapp.models.ScannedCard;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -21,7 +22,7 @@ import java.util.Arrays;
 public class ScannedCardsListFragment extends Fragment {
 
     private SuperRecyclerView mRecyclerView;
-    private StringListAdapter mAdapter;
+    private ScannedCardsAdapter mAdapter;
 
     public ScannedCardsListFragment() {
     }
@@ -30,22 +31,41 @@ public class ScannedCardsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<String> list = new ArrayList<>();
-        list.add("A");
-        list.add("B");
-        list.add("C");
-        list.add("D");
-        list.add("E");
-        list.add("F");
-        list.add("G");
-        list.add("H");
-        mAdapter = new StringListAdapter(list, mConvertCardListener, mDeleteCardListener);
+        ArrayList<ScannedCard> list = new ArrayList<>();
+        list.add(new ScannedCard("myid1", "http://motoroids.com/wp-content/uploads/2014/09/KTM-RC390-Review-Side-Profile-600x399.jpg"));
+        list.add(new ScannedCard("myid2", "http://www.carblogindia.com/wp-content/uploads/2014/03/2014-KTM-RC-390-Front-Leaning-Right.jpg"));
+        list.add(new ScannedCard("myid3", "http://motoroids.com/wp-content/uploads/2014/09/KTM-RC390-vs-Kawasaki-Ninja-300-vs-KTM-Duke-390-44-600x399.jpg"));
+        list.add(new ScannedCard("myid4", "http://img4.wikia.nocookie.net/__cb20130325195536/fantasy-worlds/images/2/23/Emma_f11_-_other_hot_babes.jpg"));
+        list.add(new ScannedCard("myid5", "http://www.theunlocker.co.uk/wallpapers/360x640/Babes_Hunks/27923.jpg"));
+        list.add(new ScannedCard("myid6", "http://images5.fanpop.com/image/photos/31700000/HOT-BABE-KAWASAKI-Z1000-motorcycles-31778344-1920-1200.jpg"));
+        mAdapter = new ScannedCardsAdapter(list, mCardClickListener, mConvertCardListener, mDeleteCardListener);
 
         if (true) {
             // TODO: is internet
             // getPendingRequests();
         }
     }
+
+    private View.OnClickListener mCardClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+
+            Object possiblyScannedCard = v.getTag();
+
+            if (possiblyScannedCard instanceof ScannedCard) {
+                ScannedCard scannedCard = (ScannedCard) possiblyScannedCard;
+                Intent intent = new Intent(getActivity(), FullScreenImageActivity.class);
+                intent.putExtra(FullScreenImageActivity.INTENT_EXTRAS_URL, scannedCard.getUrl());
+                startActivity(intent);
+                Snackbar.make(v, "Open card ID: " + scannedCard.getId(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else {
+
+            }
+
+        }
+    };
 
     private View.OnClickListener mConvertCardListener = new View.OnClickListener() {
         @Override

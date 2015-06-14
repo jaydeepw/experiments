@@ -1,8 +1,8 @@
 package com.github.jaydeep.cardlist;
 
 
-import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,32 +10,51 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.intouchapp.models.ScannedCard;
 
-public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.ViewHolder> {
+import java.util.ArrayList;
+
+public class ScannedCardsAdapter extends RecyclerView.Adapter<ScannedCardsAdapter.ViewHolder> {
 
     private final View.OnClickListener mConvertCardListener;
     private final View.OnClickListener mDeletedCardListener;
-    public ArrayList<String> data;
+    private final View.OnClickListener mCardClickListener;
+    public ArrayList<ScannedCard> data;
 
-    public StringListAdapter(ArrayList<String> data, View.OnClickListener convertCardListener,
-                             View.OnClickListener deleteCardListener) {
+    public ScannedCardsAdapter(ArrayList<ScannedCard> data, View.OnClickListener cardLClickistener,
+                               View.OnClickListener convertCardListener,
+                               View.OnClickListener deleteCardListener) {
         this.data = data;
+        mCardClickListener = cardLClickistener;
         mConvertCardListener = convertCardListener;
         mDeletedCardListener = deleteCardListener;
     }
 
     @Override
-    public StringListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ScannedCardsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scanned_card_plank, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(StringListAdapter.ViewHolder holder, int position) {
-        holder.cardNote.setText(data.get(position));
+    public void onBindViewHolder(ScannedCardsAdapter.ViewHolder holder, int position) {
+        ScannedCard scannedCard = data.get(position);
+
+        // show note for the card if available.
+        if (scannedCard != null) {
+            String note = scannedCard.getNote();
+            if (!TextUtils.isEmpty(note)) {
+                holder.cardNote.setText(note);
+            }
+        }
+
+        holder.cardImage.setTag(scannedCard);
+        holder.cardImage.setOnClickListener(mCardClickListener);
+
+        holder.convertCard.setTag(scannedCard);
         holder.convertCard.setOnClickListener(mConvertCardListener);
+
+        holder.deleteCard.setTag(scannedCard);
         holder.deleteCard.setOnClickListener(mDeletedCardListener);
     }
 
@@ -49,15 +68,6 @@ public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.Vi
         return position;
     }
 
-    public void add(String string) {
-        insert(string, data.size());
-    }
-
-    public void insert(String string, int position) {
-        data.add(position, string);
-        notifyItemInserted(position);
-    }
-
     public void remove(int position) {
         data.remove(position);
         notifyItemRemoved(position);
@@ -69,17 +79,10 @@ public class StringListAdapter extends RecyclerView.Adapter<StringListAdapter.Vi
         notifyItemRangeRemoved(0, size);
     }
 
-    public void addAll(String[] strings) {
-        int startIndex = data.size();
-        data.addAll(startIndex, Arrays.asList(strings));
-        notifyItemRangeInserted(startIndex, strings.length);
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView cardNote;
         public ImageView cardImage;
-        public Button convertCard;
-        public Button deleteCard;
+        public Button convertCard, deleteCard;
 
         public ViewHolder(View itemView) {
             super(itemView);
