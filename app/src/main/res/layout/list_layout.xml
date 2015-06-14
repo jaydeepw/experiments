@@ -10,17 +10,22 @@
 <!--    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
 
-        <android.support.v7.widget.Toolbar
+        <!--
+        How to show/hide the toolbar when the list is scrolling.
+        https://mzgreen.github.io/2015/02/15/How-to-hideshow-Toolbar-when-list-is-scroling(part1)/
+        -->
+        <!--<android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways" />-->
 
-    </android.support.design.widget.AppBarLayout>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
 
     <com.malinskiy.superrecyclerview.SuperRecyclerView
         android:id="@+id/scanned_cards_list"
@@ -29,8 +34,16 @@
         android:background="#aba4a9"
         tools:listitem="@layout/scanned_card_plank"
         app:recyclerClipToPadding="false"
-        app:recyclerPadding="5dp"
+        app:recyclerPaddingTop="?attr/actionBarSize"
+        app:recyclerPaddingTop=""
         app:scrollbarStyle="insideOverlay"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="visible"
+        android:background="?attr/colorPrimary" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
