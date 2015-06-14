@@ -34,6 +34,10 @@ public class ScannedCardsListFragment extends Fragment {
         list.add("B");
         list.add("C");
         list.add("D");
+        list.add("E");
+        list.add("F");
+        list.add("G");
+        list.add("H");
         mAdapter = new StringListAdapter(list);
 
         if (true) {

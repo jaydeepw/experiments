@@ -18,7 +18,7 @@
         app:recyclerPaddingBottom="5dp"
         app:recyclerPaddingLeft="5dp"
         app:recyclerPaddingRight="5dp"
-        app:scrollbarStyle="insideOverlay"/>
+        app:scrollbarStyle="insideOverlay" />
 
     <!--
        How to show/hide the toolbar when the list is scrolling.

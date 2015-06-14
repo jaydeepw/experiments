@@ -6,4 +6,10 @@
 
     </style>
 
+    <style name="CardButton" parent="Widget.AppCompat.Button">
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>
