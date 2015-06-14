@@ -2,11 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/home/jay/git-repos/experiments/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars/classes.jar"
+        jar="/home/jay/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
-        <dex dex="/home/jay/git-repos/experiments/app/build/intermediates/pre-dexed/debug/classes-be4a97cf14ba001b715599eaae27bbe844e69ea7.jar" />
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/home/jay/git-repos/experiments/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-ea21321d65c3187a6e0b1f6956bac4c1fd317e13.jar" />
+    </item>
+    <item
+        jar="/home/jay/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/jay/git-repos/experiments/app/build/intermediates/pre-dexed/debug/gson-2.3.1-401cd1aeea824efefe1ca2756e1726735edd39f9.jar" />
     </item>
 
 </items>
